@@ -7,13 +7,13 @@ import Logout from "../screens/Logout";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
-  return (
-    <Drawer.Navigator screenOptions={{headerShown:false}}>
-      <Drawer.Screen name="Tela Inicial" component={StackNavigator} />
-      <Drawer.Screen name="Perfil" component={Profile} />
-      <Drawer.Screen name="Logout" component={Logout} />
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator>
+            <Drawer.Screen name="Tela Inicial" component={StackNavigator} />
+            <Drawer.Screen name="Perfil" component={Profile} />
+            <Drawer.Screen name="Logout" component={Logout} />
+        </Drawer.Navigator>
+    );
 };
 
 export default DrawerNavigator;

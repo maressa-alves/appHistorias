@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/Register";
 
-import DrawerNavigator from "./navigation/DrawerNavigator";
+import DrawerNavigator from "./navigation/DrawerNavigator"
 import firebase from "firebase/app"
 import { firebaseConfig } from "./config";
 
