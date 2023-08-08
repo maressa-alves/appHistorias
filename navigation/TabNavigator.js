@@ -13,16 +13,33 @@ export default class BottomTabNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      light_theme: true
+      light_theme: true,
+      isUpdated: false
     };
   }
+
+  renderFeed = props => {
+    return <Feed setUpdateToFalse={this.removeUpdated} {...props} />;
+  };
+
+  renderStory = props => {
+    return <CreateStory setUpdateToTrue={this.changeUpdated} {...props} />;
+  };
+
+  changeUpdated = () => {
+    this.setState({ isUpdated: true });
+  };
+
+  removeUpdated = () => {
+    this.setState({ isUpdated: false });
+  };
 
   componentDidMount() {
     let theme;
     firebase
       .database()
       .ref("/users/" + firebase.auth().currentUser.uid)
-      .on("value", function (snapshot) {
+      .on("value", function(snapshot) {
         theme = snapshot.val().current_theme;
       });
     this.setState({ light_theme: theme === "light" ? true : false });
@@ -58,8 +75,16 @@ export default class BottomTabNavigator extends Component {
         activeColor={"#ee8249"}
         inactiveColor={"gray"}
       >
-        <Tab.Screen name="Feed" component={Feed} />
-        <Tab.Screen name="Criar História" component={CreateStory} />
+        <Tab.Screen
+          name="Feed"
+          component={this.renderFeed}
+          options={{ unmountOnBlur: true }}
+        />
+        <Tab.Screen
+          name="Criar História"
+          component={this.renderStory}
+          options={{ unmountOnBlur: true }}
+        />
       </Tab.Navigator>
     );
   }
