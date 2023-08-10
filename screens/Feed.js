@@ -48,15 +48,14 @@ export default class Feed extends Component {
       .database()
       .ref("/posts/")
       .on(
-        "value",
-        snapshot => {
+        "value",(snapshot) => {
           let stories = [];
           if (snapshot.val()) {
             Object.keys(snapshot.val()).forEach(function (key) {
               stories.push({
                 key: key,
                 value: snapshot.val()[key]
-              });
+              })
             });
           }
           this.setState({ stories: stories });
